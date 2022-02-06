@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { Podcast } from "podcast";
 import fetch from "node-fetch";
 
-function api<T>(path: string): Promise<T> {
+async function api<T>(path: string): Promise<T> {
   return fetch("https://api.podme.com/web/api/v2" + path, {
     method: "GET",
     headers: {
@@ -44,8 +44,8 @@ export default async function handler(
   const feed = new Podcast({
     title: podcast.title,
     description: podcast.description,
-    feedUrl: "http://example.com/rss.xml",
-    siteUrl: "http://example.com",
+    feedUrl: "https://podme-to-rss.vercel.app/api/podcast",
+    siteUrl: "https://podme-to-rss.vercel.app",
     imageUrl: podcast.imageUrl,
     docs: "http://example.com/rss/docs.html",
     author: podcast.title,
@@ -105,6 +105,7 @@ export default async function handler(
 
   const xml = feed.buildXml();
 
+  res.setHeader("Cache-Control", "s-maxage=43200");
   res.setHeader("Content-Type", "text/xml");
   res.status(200).end(xml);
 }
