@@ -84,6 +84,8 @@ export default async function handler(
       length: string;
     }>(`/episode/${episode.id}`);
 
+    console.log("epdetails", epDetails);
+
     feed.addItem({
       title: epDetails.title,
       description: epDetails.description,
@@ -94,9 +96,9 @@ export default async function handler(
         url: epDetails.streamUrl,
         type: "audio/x-m4a",
       },
+      itunesTitle: epDetails.title,
       itunesAuthor: epDetails.podcastTitle,
       itunesExplicit: false,
-      itunesTitle: epDetails.podcastTitle,
       itunesSummary: episode.description,
       itunesDuration: epDetails.length,
       itunesImage: episode.mediumImageUrl,
