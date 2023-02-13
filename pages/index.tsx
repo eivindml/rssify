@@ -5,7 +5,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Podcast</title>
+        <title>RSSify</title>
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

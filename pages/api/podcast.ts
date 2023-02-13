@@ -41,10 +41,11 @@ export default async function handler(
   }>(`/podcast/slug/${req.query.slug}`);
 
   /* lets create an rss feed */
+  /* TODO: Remove fields that are not used and not needed */
   const feed = new Podcast({
     title: podcast.title,
     description: podcast.description,
-    feedUrl: "https://podme-to-rss.vercel.app/api/podcast",
+    feedUrl: "https://podme-to-rss.vercel.app/api/podcast", // TODO: Set this with ENV
     siteUrl: "https://podme-to-rss.vercel.app",
     imageUrl: podcast.imageUrl,
     docs: "http://example.com/rss/docs.html",
@@ -84,8 +85,9 @@ export default async function handler(
       length: string;
     }>(`/episode/${episode.id}`);
 
-    console.log("epdetails", epDetails);
+    console.log(epDetails.streamUrl);
 
+    /* TODO: Remove unused properties */
     feed.addItem({
       title: epDetails.title,
       description: epDetails.description,
